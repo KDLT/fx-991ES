@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 65">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #19181b;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>One</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g id="One">
+        <path id="Button" class="cls-1" d="M13.84,0H76.16A13.84,13.84,0,0,1,90,13.84V38.18A26.82,26.82,0,0,1,63.18,65H26.82A26.82,26.82,0,0,1,0,38.18V13.84A13.84,13.84,0,0,1,13.84,0Z" />
+        <g id="Payload">
+          <path class="cls-2" d="M35.12,45.65H43V21h-6.3V17.9a21.06,21.06,0,0,0,7.48-2.61h3.72V45.65h7v4.06H35.12Z" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
