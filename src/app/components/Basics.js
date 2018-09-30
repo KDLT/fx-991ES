@@ -54,7 +54,7 @@ export default (props) => {
         <path className="btn btn-regular" d="M496.83,1079h62.31A13.84,13.84,0,0,1,573,1092.84v24.33A26.82,26.82,0,0,1,546.16,1144H509.81A26.82,26.82,0,0,1,483,1117.18v-24.33A13.84,13.84,0,0,1,496.83,1079Z" />
         <path className="btn btn-text" d="M513.38,1109.08h29.2v4.84h-29.2Z" />
       </g>
-      <g id="add" data-payload={'*'} data-key={'+'} onClick={props.handleClick}>
+      <g id="add" data-payload={'+'} data-key={'+'} onClick={props.handleClick}>
         <path className="btn btn-regular" d="M391.83,1079h62.31A13.84,13.84,0,0,1,468,1092.84v24.33A26.82,26.82,0,0,1,441.16,1144H404.81A26.82,26.82,0,0,1,378,1117.18v-24.33A13.84,13.84,0,0,1,391.83,1079Z" />
         <path className="btn btn-text" d="M420.58,1113.78H409.25v-4.56h11.33v-12.09h4.81v12.09h11.32v4.56H425.39v12.09h-4.81Z" />
       </g>
