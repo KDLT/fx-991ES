@@ -1,11 +1,25 @@
-#Calc {
-  height: 70vh; }
+.btn {
+  fill: #18161b;
+  position: relative;
+  transition: 0.2s ease; }
 
-.cls-1 {
-  fill: black; }
+.btn-text {
+  fill: #fff;
+  position: absolute;
+  top: 32.5px;
+  left: 45px; }
+
+.btn-group > .btn:hover {
+  fill: black;
+  cursor: pointer; }
+
+.btn-group > .btn-text:hover {
+  cursor: pointer; }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Trebuchet MS", sans-serif;
-  background: linear-gradient(); }
+  font-family: "Trebuchet MS", sans-serif; }
+
+#app-container {
+  text-align: center; }

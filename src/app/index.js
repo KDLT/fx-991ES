@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import App from './containers/App';
+import Calculator from './containers/Calculator';
 import "../styles/main.scss"
 
 
@@ -11,6 +11,6 @@ import "../styles/main.scss"
 //const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 render(
-  <App />,
+  <Calculator />,
   document.getElementById('root')
 );
