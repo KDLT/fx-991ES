@@ -37,16 +37,13 @@ module.exports = {
         })
       },
       {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'babel-loader'
-          },
-          {
-            loader: 'react-svg-loader',
-            options: { jsx: true }
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]'
           }
-        ]
+        }]
       }
     ]
   },

@@ -1,9 +1,9 @@
 @import 'svg';
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
-// @font-face {
-//   font-family: calc;
-//   src: url('../assets/font/991ES.ttf');
-// }
+@font-face {
+  font-family: calc;
+  src: url('./991ES.ttf') format('ttf');
+}
 body {
   margin: 0;
   padding: 0;
