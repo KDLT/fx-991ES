@@ -10,6 +10,15 @@
   fill: #312d42;
 }
 
+.btn {
+  transition: 0.32s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
 .btn-top {
   fill: #243052;
 }
@@ -55,13 +64,6 @@
 
 .btn-regular {
   fill: #18161b;
-  position: relative;
-  transition: 0.2s ease;
-}
-
-.btn-regular:hover {
-  fill: black;
-  cursor: pointer;
 }
 
 .btn-advanced {
