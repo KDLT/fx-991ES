@@ -10,12 +10,12 @@ export default class Calculator extends Component {
     super(props)
     this.state = {
       height: 90,
-      numbers: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'],
-      operators: ['+', '-', '*', '/'],
-      functions: ['Backspace', 'Escape', 'Enter']
+      functions: ['Backspace', 'Escape', 'Enter', '='],
+      directions: ['left', 'right']
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.focusInputForm = this.focusInputForm.bind(this);
   };
   componentDidMount() {
     console.log('component mounted!');
@@ -23,27 +23,24 @@ export default class Calculator extends Component {
     // console.log(typeof Button);
     document.addEventListener('keydown', this.handleKeyDown);
   }
-  componentDidUpdate() {
-    // console.log('component updated!');
-    // console.log('complete props: ', this.props)
+  focusInputForm() {
+    document.getElementById('problem-text-input').focus();
   }
   handleKeyDown(e) {
+    this.focusInputForm();
     let keyDowned = e.key;
-    console.log(keyDowned);
-    if (this.state.numbers.includes(keyDowned)) {
-      this.props.thunkButtonInput(keyDowned);
-    }
-    else if (this.state.operators.includes(keyDowned)) {
-      this.props.thunkButtonInput(keyDowned);
-    }
-    else if (this.state.functions.includes(keyDowned)) {
-      if (keyDowned == 'Backspace') {
-        this.props.thunkButtonInput('del');
-      }
-      else if (keyDowned == 'Enter') {
-        this.props.thunkButtonInput('=');
-      }
-      else this.props.thunkButtonInput('ac');
+    console.log('keyDowned: ', keyDowned);
+    if (this.state.functions.includes(keyDowned)) {
+      switch (keyDowned) {
+        case 'Enter':
+          return this.props.thunkButtonInput('=');
+        case 'Escape':
+          return this.props.thunkButtonInput('ac');
+        case '=':
+          return this.props.thunkButtonInput('ans')
+        default:
+          return;
+      };
     }
   }
   handleClick(e) {
@@ -51,10 +48,15 @@ export default class Calculator extends Component {
     payload = e.target.parentNode.dataset.payload;
     if (!payload) {
       // console.log(e.target.parentNode.id);
-      payload = e.target.parentNode.id
+      payload = e.target.parentNode.id;
+      if (payload == 'dpad') {
+        // console.log(e.target.id);
+        payload = e.target.id;
+      }
     }
     console.log(`payload: ${payload}`);
     this.props.thunkButtonInput(payload);
+    this.focusInputForm();
   }
   render() {
     return (
@@ -71,7 +73,8 @@ export default class Calculator extends Component {
             <rect id="Cell" className="solar-cell" x="287.98" y="50.5" width="265" height="86.5" rx="7.97" ry="7.97" />
           </g>
           <Display height={this.state.height} 
-            problem={this.props.keys.problem.str}
+            problemForm={this.props.forms.string}
+            handleChange={this.props.handleFormChange}
             answer={this.props.keys.answer.str}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>

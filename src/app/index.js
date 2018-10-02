@@ -10,14 +10,22 @@ import {
   thunkButtonInput,
 } from './actions/keyActions';
 
+import {
+  handleFormChange,
+  goRight,
+  goLeft
+} from './actions/formActions';
+
 //import all actions used by components
 const mapStateToProps = (state) => ({
-  keys: state.keys
+  keys: state.keys,
+  forms: state.forms,
 })
 const mapDispatchToProps = (dispatch) => ({
-  // stringRender: () => dispatch(stringRender()),
-  // addToArray: (key) => dispatch(addToArray(key)),
-  thunkButtonInput: (payload) => dispatch(thunkButtonInput(payload))
+  thunkButtonInput: (payload) => dispatch(thunkButtonInput(payload)),
+  handleFormChange: (payload) => dispatch(handleFormChange(payload)),
+  goLeft: () => dispatch(goLeft()),
+  goRight: () => dispatch(goRight()),
 })
 
 const CalculatorContainer = 

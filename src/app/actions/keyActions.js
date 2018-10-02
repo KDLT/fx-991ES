@@ -1,46 +1,60 @@
-export const RENDER = "RENDER";
-export const ADD_TO_ARRAY = 'ADD_TO_ARRAY';
+export const ANS_RENDER = "ANS_RENDER";
 export const EVAL = 'EVAL';
-export const AC = 'AC';
-export const DEL = 'DEL';
+export const ZERO_ANS = 'ZERO_ANS';
 
-export const stringRender = (whichDisplay) => ({
-  type: RENDER,
-  display: whichDisplay
+// import { addToString } from './formActions'; // pweds mag-import ng actions across action creators
+import {
+  clearAll,
+  deleteLast,
+  addToFormString,
+  useLastAns,
+  goRight,
+  goLeft,
+} from './formActions';
+
+export const ansStringRender = () => ({
+  type: ANS_RENDER
 })
 
-export const addToArray = (key) => ({
-  type: ADD_TO_ARRAY,
-  payload: key
+export const evaluateProblem = (problemStr) => ({
+  type: EVAL,
+  payload: problemStr
 })
 
-export const evaluateProblem = () => ({
-  type: EVAL
+export const zeroAns = () => ({ // makes ans zero, DOES NOT change the array, only the rendered string
+  type: ZERO_ANS
 })
 
-export const clearAll = () => ({
-  type: AC
-})
-
-export const deleteLast = () => ({
-  type: DEL
-})
-
-export const thunkButtonInput = (payload) => (dispatch) => {
-  if (payload == '=') {
-    dispatch(evaluateProblem());
-    dispatch(stringRender('answer'));
-  }
-  else if (payload == 'ac') {
-    dispatch(clearAll());
-  }
-  else if (payload == 'del') {
-    dispatch(deleteLast());
-    // dispatch(stringRender('answer'));
-    dispatch(stringRender('problem'));
-  }
-  else {
-    dispatch(addToArray(payload));
-    dispatch(stringRender('problem'));
+export const thunkButtonInput = (payload) => (dispatch, getState) => {
+  switch (payload) {
+    case '=':
+      dispatch(evaluateProblem(getState().forms.string));
+      dispatch(ansStringRender());
+      break;
+    case 'ac':
+      dispatch(clearAll());
+      dispatch(zeroAns());
+      break;
+    case 'del':
+      dispatch(deleteLast());
+      break;
+    case 'ans':
+      dispatch(useLastAns());
+      break;
+    case 'right':
+      dispatch(goRight());
+      break;
+    case 'left':
+      dispatch(goLeft());
+      break;
+    default:
+      dispatch(addToFormString(payload));
+      break;
   }
 };
+
+const initialState = {
+
+}
+
+  
