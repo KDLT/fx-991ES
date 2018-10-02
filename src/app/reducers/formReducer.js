@@ -17,6 +17,7 @@ let regexCalc = /\d|\-|\+|\/|\*|\(|\)|\./; // note that this can't have a g flag
 export default (state = initialState, action) => {
 
   let input = document.getElementById('problem-text-input');
+  let goToIndex = 0;
 
   switch (action.type) {
 
@@ -55,15 +56,27 @@ export default (state = initialState, action) => {
     };
 
   case GO_RIGHT:
-    input.setSelectionRange(state.cursorPosition++, state.cursorPosition++);
+    if (state.cursorPosition + 1 > state.string.length) {
+      goToIndex = 0;
+      input.setSelectionRange(goToIndex, goToIndex);
+    } else {
+      goToIndex = state.cursorPosition + 1;
+      input.setSelectionRange(goToIndex, goToIndex);
+    }
     return { ...state,
-      cursorPosition: state.cursorPosition++,
+      cursorPosition: goToIndex,
     };
   
   case GO_LEFT:
-    input.setSelectionRange(state.cursorPosition--, state.cursorPosition--);
+    if (state.cursorPosition - 1 < 0) {
+      goToIndex = state.string.length;
+      input.setSelectionRange(goToIndex, goToIndex);
+    } else {
+      goToIndex = state.cursorPosition - 1;
+      input.setSelectionRange(goToIndex, goToIndex);
+    }
     return { ...state,
-      cursorPosition: state.cursorPosition--,
+      cursorPosition: goToIndex,
     };
 
   default:

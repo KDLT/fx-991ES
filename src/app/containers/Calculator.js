@@ -51,6 +51,7 @@ export default class Calculator extends Component {
       payload = e.target.parentNode.id;
       if (payload == 'dpad') {
         // console.log(e.target.id);
+        this.focusInputForm();
         payload = e.target.id;
       }
     }
