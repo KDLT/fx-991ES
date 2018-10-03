@@ -35,7 +35,6 @@ body {
 }
 
 #problem-text-input {
-  caret-color: darkgreen;
   font-size: 3rem;
   font-family: calc, 'Source Code Pro', monospace;
   background: transparent;
@@ -46,4 +45,8 @@ body {
 #problem-text-input:focus {
   // outline-color: darkgreen;
   outline: none;
+}
+
+#svg-caret {
+  fill: rgb(17, 17, 17);
 }

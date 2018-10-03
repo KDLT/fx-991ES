@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import anime from 'animejs';
+
 import Display from '../components/Display';
 import Basics from '../components/Basics';
 import Advanced from '../components/Advanced'
@@ -15,19 +17,22 @@ export default class Calculator extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.focusInputForm = this.focusInputForm.bind(this);
   };
   componentDidMount() {
     console.log('component mounted!');
     console.log('complete props: ', this.props)
     // console.log(typeof Button);
     document.addEventListener('keydown', this.handleKeyDown);
-  }
-  focusInputForm() {
-    document.getElementById('problem-text-input').focus();
+    let caretAnime = anime({
+      targets: '#svg-caret',
+      duration: 700,
+      delay: 500,
+      opacity: 0,
+      elasticity: 0,
+      loop: true,
+    });
   }
   handleKeyDown(e) {
-    this.focusInputForm();
     let keyDowned = e.key;
     console.log('keyDowned: ', keyDowned);
     if (this.state.functions.includes(keyDowned)) {
@@ -57,7 +62,6 @@ export default class Calculator extends Component {
     }
     console.log(`payload: ${payload}`);
     this.props.thunkButtonInput(payload);
-    this.focusInputForm();
   }
   render() {
     return (
