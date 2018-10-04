@@ -11,19 +11,17 @@ import {
 } from './actions/keyActions';
 
 import {
-  handleFormChange,
   goRight,
   goLeft
-} from './actions/formActions';
+} from './actions/problemActions';
 
 //import all actions used by components
 const mapStateToProps = (state) => ({
   keys: state.keys,
-  forms: state.forms,
+  problem: state.problem,
 })
 const mapDispatchToProps = (dispatch) => ({
   thunkButtonInput: (payload) => dispatch(thunkButtonInput(payload)),
-  handleFormChange: (payload) => dispatch(handleFormChange(payload)),
   goLeft: () => dispatch(goLeft()),
   goRight: () => dispatch(goRight()),
 })

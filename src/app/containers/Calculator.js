@@ -13,7 +13,7 @@ export default class Calculator extends Component {
     this.state = {
       height: 90,
       functions: ['Backspace', 'Escape', 'Enter', '='],
-      directions: ['left', 'right']
+      directions: ['ArrowLeft', 'ArrowRight']
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -42,11 +42,22 @@ export default class Calculator extends Component {
         case 'Escape':
           return this.props.thunkButtonInput('ac');
         case '=':
-          return this.props.thunkButtonInput('ans')
+          return this.props.thunkButtonInput('ans');
+        case 'Backspace':
+          return this.props.thunkButtonInput('del')
         default:
           return;
       };
-    }
+    } else if (this.state.functions.includes(keyDowned)) {
+      switch (keyDowned) {
+        case 'ArrowLeft':
+          return this.props.thunkButtonInput('left');
+        case 'ArrowRight':
+          return this.props.thunkButtonInput('right');
+        default:
+          return;
+      };
+    } else return this.props.thunkButtonInput(keyDowned);
   }
   handleClick(e) {
     let payload = '';
@@ -56,7 +67,6 @@ export default class Calculator extends Component {
       payload = e.target.parentNode.id;
       if (payload == 'dpad') {
         // console.log(e.target.id);
-        this.focusInputForm();
         payload = e.target.id;
       }
     }
@@ -78,9 +88,10 @@ export default class Calculator extends Component {
             <rect id="Cell" className="solar-cell" x="287.98" y="50.5" width="265" height="86.5" rx="7.97" ry="7.97" />
           </g>
           <Display height={this.state.height} 
-            problemForm={this.props.forms.string}
+            problemForm={this.props.problem.string}
             handleChange={this.props.handleFormChange}
-            answer={this.props.keys.answer.str}/>
+            answer={this.props.keys.answer.str}
+            caretPos={this.props.problem.caretPosition}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>
           <Numbers handleClick={this.handleClick}/>

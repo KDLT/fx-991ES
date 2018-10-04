@@ -2,7 +2,7 @@ import React from 'react';
 
 export default (props) => {
   let initialCaretPosition = 90;
-  let caretPosition = 90+23; //23 units ang laktaw ng cursor per number
+  let caretPosition = props.caretPos; //23 units ang laktaw ng cursor per number
   return (
     <g id="display">
       <rect id="screen" className="display-screen" x="72.98" y="189" width="490" height="195" rx="8.73" ry="8.73" />

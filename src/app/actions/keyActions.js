@@ -10,7 +10,7 @@ import {
   useLastAns,
   goRight,
   goLeft,
-} from './formActions';
+} from './problemActions';
 
 export const ansStringRender = () => ({
   type: ANS_RENDER
@@ -28,7 +28,7 @@ export const zeroAns = () => ({ // makes ans zero, DOES NOT change the array, on
 export const thunkButtonInput = (payload) => (dispatch, getState) => {
   switch (payload) {
     case '=':
-      dispatch(evaluateProblem(getState().forms.string));
+      dispatch(evaluateProblem(getState().problem.string));
       dispatch(ansStringRender());
       break;
     case 'ac':
