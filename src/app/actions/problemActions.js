@@ -18,7 +18,7 @@ export const deleteLast = () => ({
 })
 
 export const useLastAns = () => (dispatch, getState) => {
-  let lastAns = getState().answer.arr.join('');
+  let lastAns = getState().answer.arr;
   dispatch(addToProblemArray(lastAns))
 }
 
