@@ -8,7 +8,7 @@ import "../styles/main.scss"
 
 import {
   thunkButtonInput,
-} from './actions/keyActions';
+} from './actions/answerActions';
 
 import {
   goRight,
@@ -17,7 +17,7 @@ import {
 
 //import all actions used by components
 const mapStateToProps = (state) => ({
-  keys: state.keys,
+  answer: state.answer,
   problem: state.problem,
 })
 const mapDispatchToProps = (dispatch) => ({

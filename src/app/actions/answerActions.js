@@ -6,7 +6,7 @@ export const ZERO_ANS = 'ZERO_ANS';
 import {
   clearAll,
   deleteLast,
-  addToFormString,
+  addToProblemArray,
   useLastAns,
   goRight,
   goLeft,
@@ -48,13 +48,10 @@ export const thunkButtonInput = (payload) => (dispatch, getState) => {
       dispatch(goLeft());
       break;
     default:
-      dispatch(addToFormString(payload));
+      dispatch(addToProblemArray(payload));
+      // dispatch(addToProblemString(payload));
       break;
   }
 };
-
-const initialState = {
-
-}
 
   

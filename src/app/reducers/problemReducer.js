@@ -1,53 +1,93 @@
 import {
   ADD_TO_STRING,
+  ADD_TO_ARRAY,
   AC,
   DEL,
   GO_RIGHT,
   GO_LEFT,
 } from '../actions/problemActions';
 
-let initialState = {
+const initialState = {
   string: '',
-  initialCaretPosition: 90,
+  array: [],
+  caretIndex: 0,
   caretPosition: 90,
-  charWidth: 22,
 }
-
-let regexCalc = /\d|\-|\+|\/|\*|\(|\)|\./; // note that this can't have a g flag
+const initialCaretPosition = 90;
+const regexCalc = /\d|\-|\+|\/|\*|\(|\)|\./; // note that this can't have a g flag
+const charWidth = 22; // character width relative to svg viewbox
 
 export default (state = initialState, action) => {
+  let concatThis = '';
+  let caretDelta = 0;
+  let newArray = [];
+  let newCaretIndex = state.caretIndex;
+  let newCaretPosition = state.caretPosition;
 
   switch (action.type) {
 
+    case ADD_TO_ARRAY: // also renders the string upon updating problem array
+      // console.log('ADD_TO_ARRAY payload: ', action.payload);
+      // check if payload is valid
+      regexCalc.test(action.payload) ? concatThis = action.payload : concatThis;
+      console.log('concatThis after regex check: ', concatThis);
+      if (concatThis) {
+        caretDelta = charWidth * concatThis.length;
+        newCaretIndex = state.caretIndex + concatThis.length;
+        newArray = state.array.slice(0, state.caretIndex)
+                        .concat(concatThis)
+                        .concat(state.array.slice(state.caretIndex));
+      } else {
+        caretDelta;
+        newCaretIndex;
+        newArray = state.array;        
+      }
+      console.log({newArray, caretDelta});
+      return {...state,
+        array: newArray,
+        string: newArray.join(''),
+        caretPosition: state.caretPosition + caretDelta,
+        caretIndex: newCaretIndex,
+      };
+
     case GO_RIGHT:
-      return { ...state };
+      if (state.caretIndex < state.array.length) {
+        newCaretIndex += 1;
+        newCaretPosition += charWidth;
+      };
+      return { ...state,
+        caretIndex: newCaretIndex,
+        caretPosition: newCaretPosition,
+      };
 
     case GO_LEFT:
-      return { ... state };
-
-    case ADD_TO_STRING:
-      let concatThis = '';
-      let caretDelta = 0;
-      regexCalc.test(action.payload) ? concatThis = action.payload : concatThis;
-      // console.log('ADD_TO_STRING concatThis: ', concatThis);
-      concatThis ? caretDelta = state.charWidth : caretDelta;
-      return {...state,
-        string: state.string.concat(concatThis),
-        caretPosition: state.caretPosition + caretDelta
+      if (state.caretIndex > 0) {
+        newCaretIndex -= 1;
+        newCaretPosition -= charWidth;
       };
-    
+      return { ... state, 
+        caretIndex: newCaretIndex,
+        caretPosition: newCaretPosition,
+      };
+
     case AC:
       console.log('clearing all..')
       return {...state,
         string: '',
-        caretPosition: state.initialCaretPosition,
+        array: [],
+        caretPosition: initialCaretPosition,
+        caretIndex: 0,
       };
 
-    case DEL:
-      console.log('DEL triggered')
-      return {...state,
-        string: state.string.slice(0, state.string.length - 1),
-        caretPosition: state.caretPosition - state.charWidth,
+    case DEL: // currently limited to deleting the most recent input
+      // console.log('DEL triggered')
+      newArray = state.array.slice(0, state.caretIndex - 1)
+                            .concat(state.array.slice(state.caretIndex));
+      return { ...state,
+        array: newArray,
+        string: newArray.join(''),
+        caretPosition: state.caretPosition - charWidth,
+        caretIndex: state.caretIndex - 1,
       };
 
     default:

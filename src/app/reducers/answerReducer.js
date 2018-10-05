@@ -2,13 +2,11 @@ import {
   ANS_RENDER,
   EVAL,
   ZERO_ANS,
-} from '../actions/keyActions';
+} from '../actions/answerActions';
 
 let initialState = {
-  answer: {
-    str: '0',
-    arr: ['0']
-  }
+  str: '0',
+  arr: ['0']
 }
 
 export default (state=initialState, action) => {
@@ -16,10 +14,7 @@ export default (state=initialState, action) => {
 
     case ANS_RENDER:
       return {...state,
-        answer: {
-          ...state.answer,
-          str: state.answer.arr.join('') // no commas yet
-        }
+        str: state.arr.join('') // no commas yet
       };
 
     case EVAL:
@@ -29,18 +24,12 @@ export default (state=initialState, action) => {
         resArr.push(numStr);
       }
       return {...state,
-        answer: {
-          ...state.answer,
-          arr: resArr
-        }
+        arr: resArr
       };
     
     case ZERO_ANS:
       return {...state,
-        answer: {
-          ...state.answer,
-          str: '0'
-        }
+        str: '0'
       }
 
     default:

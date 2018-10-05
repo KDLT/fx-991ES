@@ -1,11 +1,11 @@
-export const ADD_TO_STRING = 'ADD_TO_STRING';
+export const ADD_TO_ARRAY = 'ADD_TO_ARRAY';
 export const AC = 'AC';
 export const DEL = 'DEL';
 export const GO_RIGHT = 'GO_RIGHT';
 export const GO_LEFT = 'GO_LEFT';
 
-export const addToFormString = (str) => ({
-  type: ADD_TO_STRING,
+export const addToProblemArray = (str) => ({
+  type: ADD_TO_ARRAY,
   payload: str
 })
 
@@ -18,8 +18,8 @@ export const deleteLast = () => ({
 })
 
 export const useLastAns = () => (dispatch, getState) => {
-  let lastAns = getState().keys.answer.arr.join('');
-  dispatch(addToFormString(lastAns))
+  let lastAns = getState().answer.arr.join('');
+  dispatch(addToProblemArray(lastAns))
 }
 
 export const goRight = () => ({

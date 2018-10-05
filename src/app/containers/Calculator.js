@@ -33,7 +33,8 @@ export default class Calculator extends Component {
       elasticity: 0,
       loop: true,
     });
-  }
+  };
+
   handleKeyDown(e) {
     let keyDowned = e.key;
     console.log('keyDowned: ', keyDowned);
@@ -50,7 +51,8 @@ export default class Calculator extends Component {
         default:
           return;
       };
-    } else if (this.state.functions.includes(keyDowned)) {
+    } else if (this.state.directions.includes(keyDowned)) {
+      console.log('pressed arrowkey')
       switch (keyDowned) {
         case 'ArrowLeft':
           return this.props.thunkButtonInput('left');
@@ -60,7 +62,8 @@ export default class Calculator extends Component {
           return;
       };
     } else return this.props.thunkButtonInput(keyDowned);
-  }
+  };
+
   handleClick(e) {
     let payload = '';
     payload = e.target.parentNode.dataset.payload;
@@ -74,7 +77,8 @@ export default class Calculator extends Component {
     }
     console.log(`payload: ${payload}`);
     this.props.thunkButtonInput(payload);
-  }
+  };
+  
   render() {
     return (
       <div id='calculator-container'>
@@ -92,7 +96,7 @@ export default class Calculator extends Component {
           <Display height={this.state.height} 
             problemForm={this.props.problem.string}
             handleChange={this.props.handleFormChange}
-            answer={this.props.keys.answer.str}
+            answer={this.props.answer.str}
             caretPos={this.props.problem.caretPosition}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>
