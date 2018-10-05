@@ -86,8 +86,8 @@ export default (state = initialState, action) => {
       return { ...state,
         array: newArray,
         string: newArray.join(''),
-        caretPosition: state.caretPosition - charWidth,
-        caretIndex: state.caretIndex - 1,
+        // caretPosition: state.caretPosition - charWidth,
+        // caretIndex: state.caretIndex - 1,
       };
 
     default:

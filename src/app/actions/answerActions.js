@@ -5,7 +5,7 @@ export const ZERO_ANS = 'ZERO_ANS';
 // import { addToString } from './formActions'; // pweds mag-import ng actions across action creators
 import {
   clearAll,
-  deleteLast,
+  deleteLeftOfCaret,
   addToProblemArray,
   useLastAns,
   goRight,
@@ -25,7 +25,7 @@ export const zeroAns = () => ({ // makes ans zero, DOES NOT change the array, on
   type: ZERO_ANS
 })
 
-export const thunkButtonInput = (payload) => (dispatch, getState) => {
+export const thunkCommandInput = (payload) => (dispatch, getState) => {
   switch (payload) {
     case '=':
       dispatch(evaluateProblem(getState().problem.string));
@@ -36,7 +36,8 @@ export const thunkButtonInput = (payload) => (dispatch, getState) => {
       dispatch(zeroAns());
       break;
     case 'del':
-      dispatch(deleteLast());
+      dispatch(deleteLeftOfCaret());
+      dispatch(goLeft());
       break;
     case 'ans':
       dispatch(useLastAns());

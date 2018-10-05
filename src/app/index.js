@@ -7,7 +7,7 @@ import store from './store';
 import "../styles/main.scss"
 
 import {
-  thunkButtonInput,
+  thunkCommandInput,
 } from './actions/answerActions';
 
 import {
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
   problem: state.problem,
 })
 const mapDispatchToProps = (dispatch) => ({
-  thunkButtonInput: (payload) => dispatch(thunkButtonInput(payload)),
+  thunkCommandInput: (payload) => dispatch(thunkCommandInput(payload)),
   goLeft: () => dispatch(goLeft()),
   goRight: () => dispatch(goRight()),
 })
