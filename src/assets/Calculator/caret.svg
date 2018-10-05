@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 33">
-  <title>caret</title>
-  <g id="Layer_2" data-name="Layer 2">
-    <g id="caret">
-      <rect width="3" height="3" />
-      <rect y="3.75" width="3" height="3" />
-      <rect y="7.5" width="3" height="3" />
-      <rect y="11.25" width="3" height="3" />
-      <rect y="15" width="3" height="3" />
-      <rect y="18.75" width="3" height="3" />
-      <rect y="22.5" width="3" height="3" />
-      <rect y="26.25" width="3" height="3" />
-      <rect y="30" width="3" height="3" />
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.75 33"><title>caret</title><g id="Layer_2" data-name="Layer 2"><g id="caret"><rect width="3" height="3"/><rect y="3.75" width="3" height="3"/><rect y="7.5" width="3" height="3"/><rect y="11.25" width="3" height="3"/><rect y="15" width="3" height="3"/><rect y="18.75" width="3" height="3"/><rect y="22.5" width="3" height="3"/><rect y="26.25" width="3" height="3"/><rect y="30" width="3" height="3"/><rect x="3.75" width="3" height="3"/><rect x="3.75" y="3.75" width="3" height="3"/><rect x="3.75" y="7.5" width="3" height="3"/><rect x="3.75" y="11.25" width="3" height="3"/><rect x="3.75" y="15" width="3" height="3"/><rect x="3.75" y="18.75" width="3" height="3"/><rect x="3.75" y="22.5" width="3" height="3"/><rect x="3.75" y="26.25" width="3" height="3"/><rect x="3.75" y="30" width="3" height="3"/></g></g></svg>

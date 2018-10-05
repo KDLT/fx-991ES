@@ -11,9 +11,9 @@ const initialState = {
   string: '',
   array: [],
   caretIndex: 0,
-  caretPosition: 90,
+  caretPosition: 0,
 }
-const initialCaretPosition = 90;
+const initialCaretPosition = 0;
 const regexCalc = /\d|\-|\+|\/|\*|\(|\)|\./; // note that this can't have a g flag
 const charWidth = 22; // character width relative to svg viewbox
 
@@ -30,19 +30,20 @@ export default (state = initialState, action) => {
       // console.log('ADD_TO_ARRAY payload: ', action.payload);
       // check if payload is valid
       regexCalc.test(action.payload) ? concatThis = action.payload : concatThis;
-      console.log('concatThis after regex check: ', concatThis);
+      // console.log('concatThis after regex check: ', concatThis);
+      // kung may laman ang concatThis:
       if (concatThis) {
         caretDelta = charWidth * concatThis.length;
         newCaretIndex = state.caretIndex + concatThis.length;
         newArray = state.array.slice(0, state.caretIndex)
                         .concat(concatThis)
                         .concat(state.array.slice(state.caretIndex));
-      } else {
-        caretDelta;
-        newCaretIndex;
-        newArray = state.array;        
+      } else { // kung blanko ang concatThis:
+        caretDelta; // 0 delta
+        newCaretIndex; // newCaretIndex same as old one
+        newArray = state.array; 
       }
-      console.log({newArray, caretDelta});
+      // console.log({newArray, caretDelta});
       return {...state,
         array: newArray,
         string: newArray.join(''),
