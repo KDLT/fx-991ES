@@ -52,13 +52,13 @@ export default class Calculator extends Component {
     if (this.state.functions.includes(keyDowned)) {
       switch (keyDowned) {
         case 'Enter':
-          return this.props.thunkButtonInput('=');
+          return this.props.thunkCommandInput('=');
         case 'Escape':
-          return this.props.thunkButtonInput('ac');
+          return this.props.thunkCommandInput('ac');
         case '=':
-          return this.props.thunkButtonInput('ans');
+          return this.props.thunkCommandInput('ans');
         case 'Backspace':
-          return this.props.thunkButtonInput('del')
+          return this.props.thunkCommandInput('del')
         default:
           return;
       };
@@ -66,13 +66,13 @@ export default class Calculator extends Component {
       console.log('pressed arrowkey')
       switch (keyDowned) {
         case 'ArrowLeft':
-          return this.props.thunkButtonInput('left');
+          return this.props.thunkCommandInput('left');
         case 'ArrowRight':
-          return this.props.thunkButtonInput('right');
+          return this.props.thunkCommandInput('right');
         default:
           return;
       };
-    } else return this.props.thunkButtonInput(keyDowned);
+    } else return this.props.thunkCommandInput(keyDowned);
   };
 
   handleClick(e) {
@@ -88,7 +88,7 @@ export default class Calculator extends Component {
       }
     }
     console.log(`payload: ${payload}`);
-    this.props.thunkButtonInput(payload);
+    this.props.thunkCommandInput(payload);
   };
   
   render() {

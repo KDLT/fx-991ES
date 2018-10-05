@@ -13,7 +13,7 @@ export const clearAll = () => ({
   type: AC
 })
 
-export const deleteLast = () => ({
+export const deleteLeftOfCaret = () => ({
   type: DEL
 })
 
