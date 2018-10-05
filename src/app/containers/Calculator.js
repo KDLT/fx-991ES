@@ -19,25 +19,36 @@ export default class Calculator extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.caretBlinkOn = this.caretBlinkOn.bind(this);
+    this.caretBlinkOff = this.caretBlinkOff.bind(this);
   };
   componentDidMount() {
     console.log('component mounted!');
     console.log('complete props: ', this.props)
     // console.log(typeof Button);
     document.addEventListener('keydown', this.handleKeyDown);
-    let caretAnime = anime({
-      targets: '#svg-caret',
-      duration: 700,
-      delay: 500,
-      opacity: 0,
-      elasticity: 0,
-      loop: true,
-    });
+    this.caretBlinkOn();
+  };
+
+  componentDidUpdate() {
+    this.caretBlinkOn();
+  }
+
+  caretBlinkOn() {
+    anime({
+      targets: '#svg-caret', duration: 700, delay: 500, opacity: 0, loop: true,
+    })
+  };
+
+  caretBlinkOff() {
+    anime({ targets: '#svg-caret', delay: 0, opacity: 1, duration: 0 });
+    anime.remove('#svg-caret');
   };
 
   handleKeyDown(e) {
     let keyDowned = e.key;
     console.log('keyDowned: ', keyDowned);
+    this.caretBlinkOff();
     if (this.state.functions.includes(keyDowned)) {
       switch (keyDowned) {
         case 'Enter':
@@ -67,6 +78,7 @@ export default class Calculator extends Component {
   handleClick(e) {
     let payload = '';
     payload = e.target.parentNode.dataset.payload;
+    this.caretBlinkOff();
     if (!payload) {
       // console.log(e.target.parentNode.id);
       payload = e.target.parentNode.id;
