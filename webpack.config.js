@@ -4,7 +4,8 @@ const htmlwp = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new htmlwp({
   template: "./src/index.html",
-  filename: "./index.html" // (output directory) no need to put dist
+  filename: "./index.html", // (output directory) no need to put dist
+  favicon: "./src/assets/black_favicon.ico"
 });
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");

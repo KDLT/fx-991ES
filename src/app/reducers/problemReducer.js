@@ -1,5 +1,4 @@
 import {
-  ADD_TO_STRING,
   ADD_TO_ARRAY,
   AC,
   DEL,
@@ -38,12 +37,12 @@ export default (state = initialState, action) => {
         newArray = state.array.slice(0, state.caretIndex)
                         .concat(concatThis)
                         .concat(state.array.slice(state.caretIndex));
+        console.log('concatenating', concatThis);
       } else { // kung blanko ang concatThis:
         caretDelta; // 0 delta
         newCaretIndex; // newCaretIndex same as old one
         newArray = state.array; 
       }
-      // console.log({newArray, caretDelta});
       return {...state,
         array: newArray,
         string: newArray.join(''),

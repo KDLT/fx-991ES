@@ -27,7 +27,7 @@ export const zeroAns = () => ({ // makes ans zero, DOES NOT change the array, on
 
 export const thunkCommandInput = (payload) => (dispatch, getState) => {
   switch (payload) {
-    case '=':
+    case 'equals':
       dispatch(evaluateProblem(getState().problem.string));
       dispatch(ansStringRender());
       break;

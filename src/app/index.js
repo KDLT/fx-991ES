@@ -19,6 +19,7 @@ import {
 const mapStateToProps = (state) => ({
   answer: state.answer,
   problem: state.problem,
+  display: state.display,
 })
 const mapDispatchToProps = (dispatch) => ({
   thunkCommandInput: (payload) => dispatch(thunkCommandInput(payload)),

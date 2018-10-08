@@ -8,77 +8,51 @@ import Numbers from '../components/Numbers';
 import TopKeys from '../components/TopKeys';
 import Dpad from '../components/Dpad';
 
+import keyboardInputs from '../helper/keyboardInputs';
 
 export default class Calculator extends Component {
   constructor(props) {
     super(props)
     this.state = {
       height: 90,
-      functions: ['Backspace', 'Escape', 'Enter', '='],
-      directions: ['ArrowLeft', 'ArrowRight']
+      validKeyDowns: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.caretBlinkOn = this.caretBlinkOn.bind(this);
-    this.caretBlinkOff = this.caretBlinkOff.bind(this);
   };
+
   componentDidMount() {
     console.log('component mounted!');
-    console.log('complete props: ', this.props)
-    // console.log(typeof Button);
+    // console.log('complete props: ', this.props)
+    let validKeys = [];
+    for (let i in keyboardInputs) validKeys = validKeys.concat(keyboardInputs[i]);
+    this.setState({ validKeyDowns : validKeys });
     document.addEventListener('keydown', this.handleKeyDown);
-    this.caretBlinkOn();
   };
 
-  componentDidUpdate() {
-    this.caretBlinkOn();
-  }
-
-  caretBlinkOn() {
-    anime({
-      targets: '#svg-caret', duration: 700, delay: 500, opacity: 0, loop: true,
-    })
-  };
-
-  caretBlinkOff() {
-    anime({ targets: '#svg-caret', delay: 0, opacity: 1, duration: 0 });
-    anime.remove('#svg-caret');
+  componentDidUpdate (prevProps, prevState) {
+    console.log('cdup prevProps: ', prevProps);
+    console.log('cdup prevState: ', prevState);
+    caretBlinkOn();
   };
 
   handleKeyDown(e) {
     let keyDowned = e.key;
     console.log('keyDowned: ', keyDowned);
-    this.caretBlinkOff();
-    if (this.state.functions.includes(keyDowned)) {
-      switch (keyDowned) {
-        case 'Enter':
-          return this.props.thunkCommandInput('=');
-        case 'Escape':
-          return this.props.thunkCommandInput('ac');
-        case '=':
-          return this.props.thunkCommandInput('ans');
-        case 'Backspace':
-          return this.props.thunkCommandInput('del')
-        default:
-          return;
-      };
-    } else if (this.state.directions.includes(keyDowned)) {
-      console.log('pressed arrowkey')
-      switch (keyDowned) {
-        case 'ArrowLeft':
-          return this.props.thunkCommandInput('left');
-        case 'ArrowRight':
-          return this.props.thunkCommandInput('right');
-        default:
-          return;
-      };
-    } else return this.props.thunkCommandInput(keyDowned);
+    if (this.state.validKeyDowns.includes(keyDowned)) {
+      caretBlinkOff();
+      let payload = document.querySelector(`[data-key='${keyDowned}']`).getAttribute('data-payload');
+      // console.log('handleKeyDown payload: ',payload);
+      return this.props.thunkCommandInput(payload);
+    }
   };
 
   handleClick(e) {
     let payload = '';
+    // iset na payload ang data-payload
     payload = e.target.parentNode.dataset.payload;
-    this.caretBlinkOff();
+    caretBlinkOff();
+    // kung hindi valid ang data-payload, id ang gamitin
     if (!payload) {
       // console.log(e.target.parentNode.id);
       payload = e.target.parentNode.id;
@@ -121,3 +95,17 @@ export default class Calculator extends Component {
   };
 };
 
+const caretBlinkOn = () => {
+  anime({
+    targets: '#svg-caret',
+    duration: 700,
+    delay: 500,
+    opacity: 0,
+    loop: true,
+  })
+};
+
+const caretBlinkOff = () => {
+  anime({ targets: '#svg-caret', delay: 0, opacity: 1, duration: 0 });
+  anime.remove('#svg-caret');
+};
