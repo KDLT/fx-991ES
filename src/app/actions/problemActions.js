@@ -37,13 +37,14 @@ export const deleteLeftOfCaret = () => ({
 })
 
 export const deleteHandler = () => (dispatch, getState) => {
-  dispatch(deleteLeftOfCaret());
-  dispatch(moveIndexLeft(1));
-  if (getState().problem.array.length < 18) {
-    // this is ONLY IF there is NO OVERFLOW
-    dispatch(moveCaretLeft(1));
+  if (getState().problem.array.length > 0) {
+    dispatch(deleteLeftOfCaret());
+    dispatch(moveIndexLeft(1));
+    if (getState().problem.array.length < 18) {
+      // this is ONLY IF there is NO OVERFLOW
+      dispatch(moveCaretLeft(1));
+    }
   }
-
 }
 
 export const useLastAns = () => (dispatch, getState) => {
