@@ -15,6 +15,11 @@ import {
   goLeft
 } from './actions/problemActions';
 
+import {
+  overFlowArrowCheck,
+  problemIndentToggle,
+} from './actions/displayActions';
+
 //import all actions used by components
 const mapStateToProps = (state) => ({
   answer: state.answer,
@@ -23,8 +28,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   thunkCommandInput: (payload) => dispatch(thunkCommandInput(payload)),
-  goLeft: () => dispatch(goLeft()),
-  goRight: () => dispatch(goRight()),
+  goLeft: (steps) => dispatch(goLeft(steps)),
+  goRight: (steps) => dispatch(goRight(steps)),
 })
 
 const CalculatorContainer = 

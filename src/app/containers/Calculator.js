@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import anime from 'animejs';
 
 import Display from '../components/Display';
 import Basics from '../components/Basics';
@@ -9,6 +8,8 @@ import TopKeys from '../components/TopKeys';
 import Dpad from '../components/Dpad';
 
 import keyboardInputs from '../helper/keyboardInputs';
+import SpriteAnimation from '../helper/SpriteAnimation';
+import { overFlowArrowCheck } from '../actions/displayActions';
 
 export default class Calculator extends Component {
   constructor(props) {
@@ -31,27 +32,27 @@ export default class Calculator extends Component {
   };
 
   componentDidUpdate (prevProps, prevState) {
-    console.log('cdup prevProps: ', prevProps);
-    console.log('cdup prevState: ', prevState);
-    caretBlinkOn();
+    // console.log('cdup prevProps: ', prevProps);
+    // console.log('cdup prevState: ', prevState);
+    SpriteAnimation.caretBlinkOn();
   };
 
   handleKeyDown(e) {
     let keyDowned = e.key;
-    console.log('keyDowned: ', keyDowned);
+    // console.log('keyDowned: ', keyDowned);
     if (this.state.validKeyDowns.includes(keyDowned)) {
-      caretBlinkOff();
+      SpriteAnimation.caretBlinkOff();
       let payload = document.querySelector(`[data-key='${keyDowned}']`).getAttribute('data-payload');
-      // console.log('handleKeyDown payload: ',payload);
       return this.props.thunkCommandInput(payload);
     }
+    // console.log('handleKeyDown payload: ',payload);
   };
 
   handleClick(e) {
     let payload = '';
     // iset na payload ang data-payload
     payload = e.target.parentNode.dataset.payload;
-    caretBlinkOff();
+    SpriteAnimation.caretBlinkOff();
     // kung hindi valid ang data-payload, id ang gamitin
     if (!payload) {
       // console.log(e.target.parentNode.id);
@@ -80,10 +81,10 @@ export default class Calculator extends Component {
             <rect id="Cell" className="solar-cell" x="287.98" y="50.5" width="265" height="86.5" rx="7.97" ry="7.97" />
           </g>
           <Display height={this.state.height} 
-            problemForm={this.props.problem.string}
-            handleChange={this.props.handleFormChange}
+            problemRender={this.props.problem.renderedString}
             answer={this.props.answer.str}
-            caretPos={this.props.problem.caretPosition}/>
+            caretPos={this.props.display.caretPosition}
+            display={this.props.display}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>
           <Numbers handleClick={this.handleClick}/>
@@ -93,19 +94,4 @@ export default class Calculator extends Component {
       </div>
     );
   };
-};
-
-const caretBlinkOn = () => {
-  anime({
-    targets: '#svg-caret',
-    duration: 700,
-    delay: 500,
-    opacity: 0,
-    loop: true,
-  })
-};
-
-const caretBlinkOff = () => {
-  anime({ targets: '#svg-caret', delay: 0, opacity: 1, duration: 0 });
-  anime.remove('#svg-caret');
 };

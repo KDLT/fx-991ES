@@ -6,11 +6,17 @@ export const ZERO_ANS = 'ZERO_ANS';
 import {
   clearAll,
   deleteLeftOfCaret,
-  addToProblemArray,
+  problemArrayBuilder,
+  renderProblemString,
   useLastAns,
   goRight,
   goLeft,
 } from './problemActions';
+
+import {
+  refreshDisplayState,
+  overFlowArrowCheck
+} from './displayActions';
 
 export const ansStringRender = () => ({
   type: ANS_RENDER
@@ -34,25 +40,29 @@ export const thunkCommandInput = (payload) => (dispatch, getState) => {
     case 'ac':
       dispatch(clearAll());
       dispatch(zeroAns());
+      dispatch(refreshDisplayState());
       break;
     case 'del':
       dispatch(deleteLeftOfCaret());
-      dispatch(goLeft());
+      dispatch(goLeft(1));
       break;
     case 'ans':
       dispatch(useLastAns());
+      dispatch(goRight(getState().answer.arr.length));
       break;
     case 'right':
-      dispatch(goRight());
+      dispatch(goRight(1));
       break;
     case 'left':
-      dispatch(goLeft());
+      dispatch(goLeft(1));
       break;
     default:
-      dispatch(addToProblemArray(payload));
-      // dispatch(addToProblemString(payload));
+      dispatch(problemArrayBuilder(payload));
       break;
   }
+  // check if overflow arrow/s should be rendered
+  dispatch(overFlowArrowCheck());
+  dispatch(renderProblemString());
 };
 
   
