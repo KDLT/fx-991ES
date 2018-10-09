@@ -30,12 +30,13 @@ export default (state = initialState, action) => {
     };
   case CARET_LEFT:
     newCaretPosition = oldCaretPosition - action.payload * charWidth;
-    if (newCaretPosition < 0) newCaretPosition = oldCaretPosition;
+    // if (newCaretPosition < 0) newCaretPosition = oldCaretPosition;
     return {...state,
       caretPosition: newCaretPosition
     }
   case CARET_RIGHT:
     newCaretPosition = oldCaretPosition + action.payload * charWidth;
+    // if (newCaretPosition > )
     if (newCaretPosition > maxCaretPosition) newCaretPosition = oldCaretPosition
     return { ...state,
       caretPosition: newCaretPosition

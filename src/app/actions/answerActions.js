@@ -5,7 +5,7 @@ export const ZERO_ANS = 'ZERO_ANS';
 // import { addToString } from './formActions'; // pweds mag-import ng actions across action creators
 import {
   clearAll,
-  deleteLeftOfCaret,
+  deleteHandler,
   problemArrayBuilder,
   renderProblemString,
   useLastAns,
@@ -43,8 +43,7 @@ export const thunkCommandInput = (payload) => (dispatch, getState) => {
       dispatch(refreshDisplayState());
       break;
     case 'del':
-      dispatch(deleteLeftOfCaret());
-      dispatch(goLeft(1));
+      dispatch(deleteHandler());
       break;
     case 'ans':
       dispatch(useLastAns());

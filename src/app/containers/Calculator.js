@@ -9,7 +9,6 @@ import Dpad from '../components/Dpad';
 
 import keyboardInputs from '../helper/keyboardInputs';
 import SpriteAnimation from '../helper/SpriteAnimation';
-import { overFlowArrowCheck } from '../actions/displayActions';
 
 export default class Calculator extends Component {
   constructor(props) {

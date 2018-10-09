@@ -22,7 +22,8 @@ export default (state = initialState, action) => {
   let concatThis = '';
   let newArray = [];
   let newString = '';
-  let newCaretIndex = state.caretIndex;
+  let oldCaretIndex = state.caretIndex;
+  let newCaretIndex = 0;
 
   switch (action.type) {
 
@@ -55,13 +56,19 @@ export default (state = initialState, action) => {
         renderedString: newString
       }
     case INDEX_LEFT:
+      if (oldCaretIndex - action.payload < 0) {
+        newCaretIndex = oldCaretIndex;
+      } else newCaretIndex = oldCaretIndex - action.payload
       return {...state,
-        caretIndex: state.caretIndex - action.payload
+        caretIndex: newCaretIndex
       }
 
     case INDEX_RIGHT:
+      if (oldCaretIndex + action.payload > state.array.length) {
+        newCaretIndex = oldCaretIndex;
+      } else newCaretIndex = oldCaretIndex + action.payload;
       return {...state,
-        caretIndex: state.caretIndex + action.payload
+        caretIndex: newCaretIndex
       }
 
     case AC:
