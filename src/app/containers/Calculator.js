@@ -81,8 +81,7 @@ export default class Calculator extends Component {
           </g>
           <Display height={this.state.height} 
             answer={this.props.answer.str}
-            display={this.props.display}
-            problemString={this.props.problem.renderedString}/>
+            display={this.props.display}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>
           <Numbers handleClick={this.handleClick}/>

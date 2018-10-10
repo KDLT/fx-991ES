@@ -7,7 +7,6 @@ import {
   clearAll,
   deleteHandler,
   problemArrayBuilder,
-  renderProblemString,
   useLastAns,
   goRight,
   goLeft,
@@ -15,7 +14,7 @@ import {
 
 import {
   refreshDisplayState,
-  overFlowArrowCheck
+  renderDisplayThunk,
 } from './displayActions';
 
 export const evaluateProblem = (problemStr) => ({
@@ -28,6 +27,8 @@ export const zeroAns = () => ({ // makes ans zero, DOES NOT change the array, on
 })
 
 export const thunkCommandInput = (payload) => (dispatch, getState) => {
+  let goRightTriggered = false;
+  let goLeftTriggered = false;
   switch (payload) {
     case 'equals':
       dispatch(evaluateProblem(getState().problem.string));
@@ -45,17 +46,20 @@ export const thunkCommandInput = (payload) => (dispatch, getState) => {
       break;
     case 'right':
       dispatch(goRight(1));
+      goRightTriggered = true;
       break;
     case 'left':
       dispatch(goLeft(1));
+      goLeftTriggered = true;
       break;
     default:
       dispatch(problemArrayBuilder(payload));
       break;
   }
-  // check if overflow arrow/s should be rendered
-  dispatch(overFlowArrowCheck());
-  dispatch(renderProblemString());
+  // if (goRightTriggered || goLeftTriggered) {
+  //  // do not trigger the renderer, they have their own rule
+  // } else 
+  dispatch(renderDisplayThunk(getState().problem));
 };
 
   

@@ -21,7 +21,7 @@ export default (props) => {
       
       <g clipPath="url(#clipper)">
         <text id="problem-text" x={`${problemTextStart}`} y="250">
-          {props.problemString}
+          {props.display.problemString}
         </text>
       </g>
       <text id="answer-text" x={ansTextStart} y="370">

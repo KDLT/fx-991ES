@@ -9,14 +9,11 @@ import {
 
 const initialState = {
   string: '',
-  renderedString: '',
   array: [],
   caretIndex: 0,
 }
 
 const regexCalc = /\d|\-|\+|\/|\*|\(|\)|\./; // note that this can't have a g flag
-
-
 
 export default (state = initialState, action) => {
   let concatThis = '';
@@ -29,18 +26,14 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
 
-    case ADD_TO_ARRAY: // also creates a string version of the problem
-      // console.log('ADD_TO_ARRAY payload: ', action.payload);
-      // check if payload is valid
+    case ADD_TO_ARRAY: 
       regexCalc.test(action.payload) ? concatThis = action.payload : concatThis;
-      // console.log('concatThis after regex check: ', concatThis);
-      // kung may laman ang concatThis:
       if (concatThis) {
         newArray = state.array.slice(0, state.caretIndex)
                         .concat(concatThis)
                         .concat(state.array.slice(state.caretIndex));
         // console.log('concatenating', concatThis);
-      } else { // kung blanko ang concatThis:
+      } else { 
         newArray = state.array; 
       };
       return {...state,
@@ -48,16 +41,7 @@ export default (state = initialState, action) => {
         string: newArray.join('')
       };
     
-    case RENDER_PROBLEM:
-      newString = state.array.join('');
-      // only render eighteen characters of the problem
-      if (newString.length >= 18) {
-        newString = newString.slice(newString.length - 18);
-        console.log('sliced String: ', newString)
-      }
-      return {...state,
-        renderedString: newString
-      };
+   
 
     case INDEX_LEFT:
       if (oldCaretIndex - action.payload < 0) {

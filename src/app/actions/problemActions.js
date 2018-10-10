@@ -10,14 +10,14 @@ export const INDEX_RIGHT = 'INDEX_RIGHT';
 import {
   moveCaretRight,
   moveCaretLeft,
+  overFlowArrowCheck,
 } from './displayActions';
 
-export const problemArrayBuilder = (payload) => (dispatch, getState) => {
+export const problemArrayBuilder = (payload) => (dispatch) => {
   dispatch(addToProblemArray(payload));
-  if (getState().display.overFlowLeftVisible) {
-    dispatch(moveIndexRight(payload.length));
-  } else dispatch(goRight(payload.length));
-}
+  // handling of caret movement already integrated in goRight
+  dispatch(goRight(payload.length));
+};
 
 export const addToProblemArray = (str) => ({
   type: ADD_TO_ARRAY,
@@ -38,14 +38,12 @@ export const deleteLeftOfCaret = () => ({
 
 export const deleteHandler = () => (dispatch, getState) => {
   let problemLength = getState().problem.array.length;
-  let maxCharAllowed = getState().display.maxCharAllowed;
+  let maxCharsLeftOfCaret = getState().display.maxCharsLeftOfCaret;
   if (problemLength > 0) {
     dispatch(deleteLeftOfCaret());
-    dispatch(moveIndexLeft(1));
-    if (problemLength <= maxCharAllowed) {
-      // this is ONLY IF there is NO OVERFLOW
-      dispatch(moveCaretLeft(1));
-    }
+    // dispatch(moveIndexLeft(1));
+    console.log({problemLength, maxCharsLeftOfCaret})
+    dispatch(goLeft(1));
   }
 }
 
@@ -54,28 +52,33 @@ export const useLastAns = () => (dispatch, getState) => {
 }
 
 export const goRight = (steps) => (dispatch, getState) => {
-  let problemLength = getState().problem.array.length;
-  let caretPos = getState().problem.caretIndex;
-  if (caretPos + steps > problemLength) {
-    // do nothing, it's already at the tip
+  let maxCharsLeftOfCaret = getState().display.maxCharsLeftOfCaret;
+  let caretIndex = getState().problem.caretIndex;
+  console.log({newCaretIndex: caretIndex+steps, maxCharsLeftOfCaret})
+  if (caretIndex + steps > maxCharsLeftOfCaret) {
+    // index lang ang magmomove dahil sagad na sa allowed ng display
+    dispatch(moveIndexRight(steps));
   } else {
     dispatch(moveIndexRight(steps));
     dispatch(moveCaretRight(steps));
-  }
+  };
+  dispatch(overFlowArrowCheck());
 }
 
 export const goLeft = (steps) => (dispatch, getState) => {
   if (getState().problem.caretIndex <= 0) {
     // do nothing, already at starting position
     // console.log(getState().problem.caretIndex);
-  } else if (getState().display.overFlowLeftVisible) {
+  } 
+  else if (getState().display.overFlowLeftVisible) {
     // just move the index but not the caret, the problem must move right
     dispatch(moveIndexLeft(steps));
   }
   else {
     dispatch(moveCaretLeft(steps));
     dispatch(moveIndexLeft(steps));
-  } 
+  };
+  dispatch(overFlowArrowCheck());
 }
 
 export const moveIndexRight = (steps) => ({
