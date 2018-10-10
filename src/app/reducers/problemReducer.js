@@ -25,6 +25,8 @@ export default (state = initialState, action) => {
   let oldCaretIndex = state.caretIndex;
   let newCaretIndex = 0;
 
+  // const concatThis = ()
+
   switch (action.type) {
 
     case ADD_TO_ARRAY: // also creates a string version of the problem
@@ -48,20 +50,22 @@ export default (state = initialState, action) => {
     
     case RENDER_PROBLEM:
       newString = state.array.join('');
+      // only render eighteen characters of the problem
       if (newString.length >= 18) {
-        newString = newString.slice(newString.length - 17);
+        newString = newString.slice(newString.length - 18);
         console.log('sliced String: ', newString)
       }
       return {...state,
         renderedString: newString
-      }
+      };
+
     case INDEX_LEFT:
       if (oldCaretIndex - action.payload < 0) {
         newCaretIndex = oldCaretIndex;
       } else newCaretIndex = oldCaretIndex - action.payload
       return {...state,
         caretIndex: newCaretIndex
-      }
+      };
 
     case INDEX_RIGHT:
       if (oldCaretIndex + action.payload > state.array.length) {
@@ -69,7 +73,7 @@ export default (state = initialState, action) => {
       } else newCaretIndex = oldCaretIndex + action.payload;
       return {...state,
         caretIndex: newCaretIndex
-      }
+      };
 
     case AC:
       console.log('clearing all..')

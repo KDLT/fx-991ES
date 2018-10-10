@@ -37,10 +37,12 @@ export const deleteLeftOfCaret = () => ({
 })
 
 export const deleteHandler = () => (dispatch, getState) => {
-  if (getState().problem.array.length > 0) {
+  let problemLength = getState().problem.array.length;
+  let maxCharAllowed = getState().display.maxCharAllowed;
+  if (problemLength > 0) {
     dispatch(deleteLeftOfCaret());
     dispatch(moveIndexLeft(1));
-    if (getState().problem.array.length < 18) {
+    if (problemLength <= maxCharAllowed) {
       // this is ONLY IF there is NO OVERFLOW
       dispatch(moveCaretLeft(1));
     }
@@ -48,8 +50,7 @@ export const deleteHandler = () => (dispatch, getState) => {
 }
 
 export const useLastAns = () => (dispatch, getState) => {
-  let lastAns = getState().answer.arr;
-  dispatch(addToProblemArray(lastAns))
+  dispatch(problemArrayBuilder(getState().answer.arr))
 }
 
 export const goRight = (steps) => (dispatch, getState) => {
@@ -66,8 +67,12 @@ export const goRight = (steps) => (dispatch, getState) => {
 export const goLeft = (steps) => (dispatch, getState) => {
   if (getState().problem.caretIndex <= 0) {
     // do nothing, already at starting position
-    console.log(getState().problem.caretIndex);
-  } else {
+    // console.log(getState().problem.caretIndex);
+  } else if (getState().display.overFlowLeftVisible) {
+    // just move the index but not the caret, the problem must move right
+    dispatch(moveIndexLeft(steps));
+  }
+  else {
     dispatch(moveCaretLeft(steps));
     dispatch(moveIndexLeft(steps));
   } 

@@ -80,10 +80,9 @@ export default class Calculator extends Component {
             <rect id="Cell" className="solar-cell" x="287.98" y="50.5" width="265" height="86.5" rx="7.97" ry="7.97" />
           </g>
           <Display height={this.state.height} 
-            problemRender={this.props.problem.renderedString}
             answer={this.props.answer.str}
-            caretPos={this.props.display.caretPosition}
-            display={this.props.display}/>
+            display={this.props.display}
+            problemString={this.props.problem.renderedString}/>
           <Basics handleClick={this.handleClick}/>
           <Advanced handleClick={this.handleClick}/>
           <Numbers handleClick={this.handleClick}/>

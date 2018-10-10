@@ -1,5 +1,4 @@
 import {
-  ANS_RENDER,
   EVAL,
   ZERO_ANS,
 } from '../actions/answerActions';
@@ -12,19 +11,13 @@ let initialState = {
 export default (state=initialState, action) => {
   switch (action.type) {
 
-    case ANS_RENDER:
-      return {...state,
-        str: state.arr.join('') // no commas yet
-      };
-
-    case EVAL:
+    case EVAL: // integrated the rendering of answer string
       let result = eval(action.payload).toString();
       let resArr = [];
-      for (let numStr of result) {
-        resArr.push(numStr);
-      }
+      for (let numStr of result) resArr.push(numStr);
       return {...state,
-        arr: resArr
+        arr: resArr,
+        str: resArr.join('')
       };
     
     case ZERO_ANS:

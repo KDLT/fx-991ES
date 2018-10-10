@@ -41,3 +41,10 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+
+// maxCharAllowed:
+//  19 kung isa lang ang overflow (left) at nasa dulo ang caret
+//  20 kung isa lang overflow (left) at nasa second to the last character ang caret
+//  21 (true max) if caretIndex == getState().problem.arr.length - 2
+//  20 again if both overflows are visible:
+//    both overflows are visible if caretIndex < getState().problem.arr.length - 2

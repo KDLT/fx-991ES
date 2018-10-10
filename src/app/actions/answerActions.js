@@ -18,10 +18,6 @@ import {
   overFlowArrowCheck
 } from './displayActions';
 
-export const ansStringRender = () => ({
-  type: ANS_RENDER
-})
-
 export const evaluateProblem = (problemStr) => ({
   type: EVAL,
   payload: problemStr
@@ -35,7 +31,6 @@ export const thunkCommandInput = (payload) => (dispatch, getState) => {
   switch (payload) {
     case 'equals':
       dispatch(evaluateProblem(getState().problem.string));
-      dispatch(ansStringRender());
       break;
     case 'ac':
       dispatch(clearAll());
@@ -47,7 +42,6 @@ export const thunkCommandInput = (payload) => (dispatch, getState) => {
       break;
     case 'ans':
       dispatch(useLastAns());
-      dispatch(goRight(getState().answer.arr.length));
       break;
     case 'right':
       dispatch(goRight(1));

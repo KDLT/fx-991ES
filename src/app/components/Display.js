@@ -2,10 +2,11 @@ import React from 'react';
 import SpriteRender from '../helper/SpriteRender'
 
 export default (props) => {
-  let charWidth = 22;
-  let caretPosition = props.caretPos; //22 units ang laktaw ng cursor per character
-  let maxCaretPosition = charWidth*18;
+  let charWidth = props.display.charWidth;
+  let caretPosition = props.display.caretPosition;
+  let maxCaretPosition = charWidth*props.maxCharDisplayed;
   let problemTextStart = 90;
+  let ansTextStart = problemTextStart + charWidth * (21 - props.answer.length);
   // console.log('overflowleftvisible? ', props.display.overFlowLeftVisible);
   if (props.display.overFlowLeftVisible) {
     problemTextStart = problemTextStart + charWidth;
@@ -20,10 +21,10 @@ export default (props) => {
       
       <g clipPath="url(#clipper)">
         <text id="problem-text" x={`${problemTextStart}`} y="250">
-          {props.problemRender}
+          {props.problemString}
         </text>
       </g>
-      <text id="answer-text" x={90+charWidth*(21-props.answer.length)} y="370">
+      <text id="answer-text" x={ansTextStart} y="370">
         {props.answer}
       </text>
       <clipPath id="clipper">
