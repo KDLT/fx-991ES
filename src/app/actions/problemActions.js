@@ -54,10 +54,14 @@ export const useLastAns = () => (dispatch, getState) => {
 export const goRight = (steps) => (dispatch, getState) => {
   let maxCharsLeftOfCaret = getState().display.maxCharsLeftOfCaret;
   let caretIndex = getState().problem.caretIndex;
+  let problemLength = getState().problem.string.length;
   console.log({newCaretIndex: caretIndex+steps, maxCharsLeftOfCaret})
-  if (caretIndex + steps > maxCharsLeftOfCaret) {
+  if (caretIndex == problemLength) {
+    // do nothing, nasa dulo na ng problem
+  } else if (caretIndex + steps > maxCharsLeftOfCaret) {
     // index lang ang magmomove dahil sagad na sa allowed ng display
     dispatch(moveIndexRight(steps));
+    
   } else {
     dispatch(moveIndexRight(steps));
     dispatch(moveCaretRight(steps));

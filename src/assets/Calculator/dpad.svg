@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 149.93 150.35">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #243052;
+      }
+
+      .cls-2 {
+        fill: #35477a;
+      }
+
+      .btn-directions-backing {
+        fill: #31406e;
+      }
+    </style>
+  </defs>
+  <title>dpad</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="calc">
+      <g id="dpad">
+        <g id="inner-circle">
+          <circle class="cls-1" cx="74.97" cy="74.97" r="47" />
+          <path class="cls-2" d="M75,29A46,46,0,1,1,29,75,46.05,46.05,0,0,1,75,29m0-2a48,48,0,1,0,48,48A48,48,0,0,0,75,27Z" />
+        </g>
+        <path id="up-backing" class="btn-directions-backing" d="M21.93,22.38,41,41.47a48,48,0,0,1,67.88,0L128,22.38A75,75,0,0,0,21.93,22.38Z" />
+        <path id="left-backing" class="btn-directions-backing" d="M22,128.41l19.09-19.09a48,48,0,0,1,0-67.88L22,22.35A75,75,0,0,0,22,128.41Z" />
+        <path id="down-backing" class="btn-directions-backing" d="M128,128.38l-19.09-19.09a48,48,0,0,1-67.88,0l-19.1,19.09A75,75,0,0,0,128,128.38Z" />
+        <path id="right-backing" class="btn-directions-backing" d="M128,22.35,108.88,41.44a48,48,0,0,1,0,67.88L128,128.41A75,75,0,0,0,128,22.35Z" />
+        <path id="up" class="btn-directions" d="M21.93,22,41,41.06a48,48,0,0,1,67.88,0L128,22A75,75,0,0,0,21.93,22Zm44.42-2.5L75.29,6.15l8.93,13.32Z" />
+        <path id="left" class="btn-directions" d="M22,128l19.09-19.09a48,48,0,0,1,0-67.88L22,21.93A75,75,0,0,0,22,128Zm-2.5-44.42L6.15,74.65l13.32-8.93Z" />
+        <path id="down" class="btn-directions" d="M128,128l-19.09-19.09a48,48,0,0,1-67.88,0L21.93,128A75,75,0,0,0,128,128Zm-44.42,2.5-8.93,13.32-8.93-13.32Z" />
+        <path id="right" class="cls-1" d="M128,22,108.88,41.12a48,48,0,0,1,0,67.88L128,128.1A75,75,0,0,0,128,22Zm2.5,44.42,13.32,8.93-13.32,8.93Z" />
+      </g>
+    </g>
+  </g>
+</svg>

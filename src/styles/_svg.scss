@@ -19,7 +19,8 @@
   cursor: pointer;
 }
 
-.btn-top {
+.btn-top,
+.btn-directions {
   fill: #243052;
 }
 
@@ -29,11 +30,14 @@
   stroke-width: 0.5px;
 }
 
-.btn-directions,
 .btn-top,
 .display-screen,
 .inner-ring {
   stroke-miterlimit: 10;
+}
+
+.btn-directions-backing {
+  fill: #31406e;
 }
 
 .inner-ring {
@@ -68,10 +72,4 @@
 
 .btn-advanced {
   fill: #3b3e43;
-}
-
-.btn-directions {
-  fill: #35477a;
-  stroke: #304170;
-  stroke-width: 0.25px;
 }

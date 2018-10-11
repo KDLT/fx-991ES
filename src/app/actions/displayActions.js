@@ -51,13 +51,12 @@ export const changeMaxCharAllowed = (max) => ({
 });
 
 export const leftOverFlowCheck = () => (dispatch, getState) => {
-  // let maxCaretPosition = getState().display.maxCharsLeftOfCaret * getState().display.charWidth;
   let actualCaretPosition = getState().display.caretPosition;
   let supposedCaretPosition = getState().problem.caretIndex * getState().display.charWidth;
   console.log({supposedCaretPosition, actualCaretPosition});
   if (supposedCaretPosition > actualCaretPosition) { 
     // hindi na tugma ang caretIndex sa caretPosition dahil pumreno sa 19th character
-    // sumobra ang index sa dapat na position so natulak pakaliwa 'yung problem
+    // sumobra ang index sa dapat na position so natulak pakaliwa 'yung problem=
     if (!getState().display.overFlowLeftVisible) dispatch(arrowLeftToggle());
   }
   else if (supposedCaretPosition == actualCaretPosition) {
